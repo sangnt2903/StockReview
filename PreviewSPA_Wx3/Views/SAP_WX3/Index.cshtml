@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    fieldset.scheduler-border {
+        border: 1px groove #ddd !important;
+        padding: 0 1.4em 1.4em 1.4em !important;
+        margin: 0 0 1.5em 0 !important;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width: auto;
+        padding: 0 10px;
+        border-bottom: none;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="UploadSAP" class="form-inline form-group" enctype="multipart/form-data">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">SAP</legend>
+                <div class="form-control col-md-8">
+                    <label for="staticEmail2" class="sr-only">Tên file</label>
+                    <input type="file" readonly name="fExcelSAP" value="Chọn một file để upload...">
+                </div>
+                <div class="col-md-4">
+                    <input type="submit" name="SAP" class="btn btn-success" value="Upload" />
+                </div>
+            </fieldset>
+            @if (Context.Session.GetComplexData<List<SAPModel>>("SAPList") != null)
+            {
+                List<SAPModel> resSAP = Context.Session.GetComplexData<List<SAPModel>>("SAPList");
+                <div class="text text-info">Success for import data from SAP Stock - @resSAP.Count() records found!</div>
+                <div>
+                    <table id="sapdt" class="display nowrap" style="width:100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Material Code</th>
+                                <th scope="col">Material Desc</th>
+                                <th scope="col">Local Storage</th>
+                                <th scope="col">Batch</th>
+                                <th scope="col">Unrestricted</th>
+                                <th scope="col">Quality Inspection</th>
+                                <th scope="col">Blocked</th>
+                                <th scope="col">All Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var i = 1;
+                                foreach (var item in resSAP)
+                                {
+                                    <tr>
+                                        <th scope="row">@i</th>
+                                        <td>@item.MaterialCode</td>
+                                        <td>@item.MaterialDesc</td>
+                                        <td>@item.LocalStorage</td>
+                                        <td>@item.Batch</td>
+                                        <td>@item.Quantity.Unrestricted</td>
+                                        <td>@item.Quantity.QualityInspection</td>
+                                        <td>@item.Quantity.Blocked</td>
+                                        <td>@item.Quantity.AllStock</td>
+                                    </tr>
+                                    i++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <form asp-action="UploadWX3" class="form-inline form-group" enctype="multipart/form-data">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">WX3</legend>
+                <div class="form-control col-md-8">
+                    <label for="staticEmail2" class="sr-only">Tên file</label>
+                    <input type="file" readonly name="fExcelWX3" value="Chọn một file để upload...">
+                </div>
+                <div class="col-md-4">
+                    <input type="submit" name="WX3" class="btn btn-success" value="Upload" />
+                </div>
+            </fieldset>
+        </form>
+        @if (Context.Session.GetComplexData<List<WX3Model>>("WX3List") != null)
+        {
+            List<WX3Model> resWx3 = Context.Session.GetComplexData<List<WX3Model>>("WX3List");
+            <div class="text text-info">Success for import data from WX3 Stock - @resWx3.Count() records found!</div>
+            <div>
+                <table id="wx3dt" class="display nowrap" style="width:100%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Product Code</th>
+                            <th scope="col">Product Desc</th>
+                            <th scope="col">Vendor</th>
+                            <th scope="col">Lot No</th>
+                            <th scope="col">Avail Qty</th>
+                            <th scope="col">Resv Qty</th>
+                            <th scope="col">All Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var j = 1;
+                            foreach (var item in resWx3)
+                            {
+                                <tr>
+                                    <th scope="row">@j</th>
+                                    <td>@item.ProductCode</td>
+                                    <td>@item.ProductDesc</td>
+                                    <td>@item.VendorCode</td>
+                                    <td>@item.LotNo</td>
+                                    <td>@item.AvailQty</td>
+                                    <td>@item.ResvQty</td>
+                                    <td>@item.AllStock</td>
+                                </tr>
+                                j++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sapdt').DataTable({
+            "scrollX": true
+        });
+    });
+
+    $(document).ready(function () {
+        $('#wx3dt').DataTable({
+            "scrollX": true
+        });
+    });
+</script>
+

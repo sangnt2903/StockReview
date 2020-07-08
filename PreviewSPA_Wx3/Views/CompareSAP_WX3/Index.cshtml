@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SAP_WX3ModelView>
+@{
+    ViewData["Title"] = "Compare SAP and WX3";
+}
+
+<div class="container">
+    <div class="text-center text-info text-uppercase">
+        <h2>All Details Inventory By comparation of SAP and WX3</h2>
+        <a asp-action="ExportToExcel" class="btn btn-success"><i class="glyphicon glyphicon-arrow-up"></i> &nbsp; Export To Excel</a>
+        <a href="mailto:you@example.com" class="btn btn-success"><i class="fa fa-mail-forward"></i> &nbsp; Send Mail</a>
+    </div>
+    <div>
+        <table id="cdt" class="display nowrap" style="width:100%">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="text-align:center;" scope="col">#</th>
+                    <th style="text-align:center;" scope="col">Material Code</th>
+                    <th scope="col">Material Desc</th>
+                    <th style="text-align:center;" scope="col">Local Storage</th>
+                    <th style="text-align:center;" scope="col">Batch</th>
+                    <th style="text-align:center;" scope="col">All Stocks SAP</th>
+                    <th style="text-align:center;" scope="col">All Stocks WX3
+                    <th style="text-align:center;" scope="col">DIFF</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var j = 1;
+                    foreach (var item in Model)
+                    {
+                        string color = j % 2 == 0 ? "lightblue" : "";
+                        <tr style="background-color:@color">
+                            <td style="text-align:center;" scope="col">@j</td>
+                            <td style="text-align:center;" scope="col">@item.MaterialCode</td>
+                            <td scope="col">@item.MaterialDesc</td>
+                            <td style="text-align:center;" scope="col">@item.LocalStorage</td>
+                            <td style="text-align:center;" scope="col">@item.Batch</td>
+                            <td style="text-align:center;" scope="col">@item.AllStockSAP</td>
+                            <td style="text-align:center;" scope="col">@item.AllStockWX3</td>
+                            @if (item.Diff >= 0)
+                            {
+                                <td style="text-align:center;" scope="col">@item.Diff</td>
+                            }
+                            else
+                            {
+                                <td style="text-align:center; background-color:red" scope="col">@item.Diff</td>
+                            }
+
+                        </tr>
+                        j++;
+                    }
+                }
+            </tbody> 
+        </table>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#cdt').DataTable({
+            "scrollX": true
+        });
+    });
+</script>
+

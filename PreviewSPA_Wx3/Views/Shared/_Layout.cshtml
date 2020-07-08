@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Compare SAP and WX3</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <!-- bootstrap-css -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- //bootstrap-css -->
+    <!-- font CSS -->
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="~/css/font.css" type="text/css" />
+    <link href="~/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/morris.css" type="text/css" />
+    <!-- calendar -->
+    <link rel="stylesheet" href="~/css/monthly.css">
+    <!-- //calendar -->
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">YCH SPA-WX3</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a asp-controller="SAP_WX3" asp-action="Index">Upload Excel</a></li>
+                    <li><a asp-controller="CompareSAP_WX3" asp-action="Index">Preview</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    @RenderBody()
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+</body>
+</html>
+
+
